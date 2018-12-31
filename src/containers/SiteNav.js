@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 
-class SiteNav extends Component {
+export default class SiteNav extends Component {
   render() {
     return(
       <Navbar color='primary'>
@@ -12,5 +12,3 @@ class SiteNav extends Component {
     );
   }
 }
-
-export default SiteNav;

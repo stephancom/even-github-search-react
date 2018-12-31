@@ -20,8 +20,7 @@ export default class Search extends Component {
       starsValid: true,
       searching: false,
       error_response: null,
-      repositories: null,
-      searchOk: false
+      repositories: null
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -31,9 +30,11 @@ export default class Search extends Component {
   paramOK(key) {
     return this.state[key] && /\S/.test(this.state[key]);
   }
+
   paramEncode(key) {
     return encodeURIComponent(this.state[key].trim());
   }
+
   isValid() {
     this.setState({
       starsValid: this.state.stars === null || this.state.stars.length < 1 || starsRegexp.test(this.state.stars),
@@ -43,9 +44,11 @@ export default class Search extends Component {
 
     return this.state.topicValid && this.state.starsValid;
   }
+
   clearValid() { 
     this.setState({starsValid: true, topicValid: true });
   }
+
   urlParams() {
     var params = {};
     if (this.paramOK("topic"))   { params["topic"] = this.state.topic; }
@@ -54,6 +57,7 @@ export default class Search extends Component {
     if (this.paramOK("fork"))    { params["fork"] = true; }
     return params;
   }
+
   queryParams() {
     var query = [];
     if (this.paramOK("topic"))   { query.push(this.paramEncode("topic")); }
@@ -107,13 +111,6 @@ export default class Search extends Component {
     return(
       <Container>
         <Row>
-          <Col>topic: {this.state.topic}</Col>
-          <Col>stars: {this.state.stars}</Col>
-          <Col>license: {this.state.license}</Col>
-          <Col>fork: {this.state.fork ? 'true' : 'false'}</Col>
-        </Row>
-        <hr/>
-        <Row>
           <Col>
             <Form onSubmit={this.handleSubmit}>
               <Row>
@@ -147,7 +144,7 @@ export default class Search extends Component {
               </Row>
               <Row>
                 <Col className="footer text-center">
-                  <Button type="submit" variant="primary" disabled={this.state.searching}>Search</Button>
+                  <Button type="submit" color="primary" disabled={this.state.searching}>Search</Button>
                 </Col>
               </Row>
             </Form>
@@ -157,7 +154,7 @@ export default class Search extends Component {
         <Row>
           <Col className="text-center m-5">
             { this.state.searching ? (
-              <img alt="searching..." v-if="this.state.searching" src="SpinnyBalls.gif" />
+              <img alt="searching..." src="SpinnyBalls.gif" />
             ) : (
               <div>
                 { this.state.error_response ? (

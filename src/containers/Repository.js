@@ -5,7 +5,7 @@ import './Repository.scss';
 export default class Repository extends Component {
   render() {
     return(
-      <Row className="m4 px-4 px-md-0">
+      <Row className="m-4 px-4 px-md-0">
         <Col className="col-md-8 col-12 border p-3">
           <Row className="pt-3">
             <Col>
