@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import axios from '../github_axios';
 import Repository from './Repository';
+import Errors from './Errors';
 
 const licenses = ["", "MIT", "ISC", "Apache", "GPL"];
 const searchPath = "/search/repositories";
@@ -34,7 +35,6 @@ export default class Search extends Component {
     return encodeURIComponent(this.state[key].trim());
   }
   isValid() {
-    console.log('isValid', this);
     this.setState({
       starsValid: this.state.stars === null || this.state.stars.length < 1 || starsRegexp.test(this.state.stars),
       // topic can be blank if license or stars are filled in
@@ -96,7 +96,7 @@ export default class Search extends Component {
         this.setState({repositories: response.data.items});
       })
       .catch(error => {
-        this.setState({repositories: null, error_response: error["response"]["data"]});
+        this.setState({repositories: null, error_response: error.response.data});
       })
       .then(() => {
         this.setState({searching: false});
@@ -159,13 +159,13 @@ export default class Search extends Component {
             { this.state.searching ? (
               <img alt="searching..." v-if="this.state.searching" src="SpinnyBalls.gif" />
             ) : (
-              <p>
+              <div>
                 { this.state.error_response ? (
-                  <errors data={this.error_response}></errors>
+                  <Errors data={this.state.error_response}></Errors>
                 ) : (
-                  <span>{this.queryMessage()}</span>
+                  <p>{this.queryMessage()}</p>
                 ) }
-              </p>
+              </div>
             ) }
           </Col>
         </Row>
