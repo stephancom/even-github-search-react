@@ -14,7 +14,7 @@ class App extends Component {
         <Container>
           <Row>
             <Col>
-              <h1 class="heading">Even Financial GitHub Repository Search</h1>
+              <h1 className="heading">Even Financial GitHub Repository Search</h1>
             </Col>
           </Row>
           <Search></Search>

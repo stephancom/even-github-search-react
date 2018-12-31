@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import axios from '../github_axios';
+import Repository from './Repository';
 
 const licenses = ["", "MIT", "ISC", "Apache", "GPL"];
 const searchPath = "/search/repositories";
@@ -168,18 +169,7 @@ export default class Search extends Component {
             ) }
           </Col>
         </Row>
-        { this.state.repositories != null &&
-          <Row>
-            <Col>
-              <ol>
-                {
-                  this.state.repositories.map((repo, i) => <li key={i}>{repo.name}</li>)
-                }
-              </ol>
-              <repository v-for="repo in repositories" repo="repo"></repository>
-            </Col>
-          </Row>
-        }
+        { this.state.repositories && this.state.repositories.map((repo, i) => <Repository key={i} repo={repo}></Repository>) }
       </Container>
     );
   }
